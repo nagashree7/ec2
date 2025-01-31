@@ -8,6 +8,6 @@ resource "aws_instance" "example" {
    #count =1
 
   tags = {
-    Name = "tf-example"
+    Name = "ec2-instance"
   }
 }
