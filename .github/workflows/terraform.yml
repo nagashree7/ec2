@@ -41,6 +41,6 @@ jobs:
       - name: Terraform Apply
         run: terraform apply -auto-approve
 
-      # Optional: Step 7: Cleanup resources (Optional, if you want to destroy after testing)
-      - name: Terraform Destroy
-        run: terraform destroy -auto-approve
+      # # Optional: Step 7: Cleanup resources (Optional, if you want to destroy after testing)
+      # - name: Terraform Destroy
+      #   run: terraform destroy -auto-approve
