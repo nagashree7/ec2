@@ -28,7 +28,7 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}  # Store your AWS Access Key ID in GitHub Secrets
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}  # Store your AWS Secret Access Key in GitHub Secrets
           aws-region: us-east-1  # Update to your preferred region
-          
+
       # Step 4: Initialize Terraform
       - name: Terraform Init
         run: terraform init
@@ -42,5 +42,5 @@ jobs:
         run: terraform apply -auto-approve
 
       # Optional: Step 7: Cleanup resources (Optional, if you want to destroy after testing)
-      # - name: Terraform Destroy
-      #   run: terraform destroy -auto-approve
+      - name: Terraform Destroy
+        run: terraform destroy -auto-approve
