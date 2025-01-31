@@ -1,0 +1,46 @@
+name: Terraform EC2 Deployment
+
+on:
+  push:
+    branches:
+      - main  # or your preferred branch name
+
+jobs:
+  terraform:
+    name: Run Terraform
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Terraform
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.0  # Specify the Terraform version
+
+      # Step 3: Set up AWS Credentials
+      - name: Set up AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}  # Store your AWS Access Key ID in GitHub Secrets
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}  # Store your AWS Secret Access Key in GitHub Secrets
+          aws-region: us-east-1  # Update to your preferred region
+
+      # Step 4: Initialize Terraform
+      - name: Terraform Init
+        run: terraform init
+
+      # Step 5: Plan the Terraform deployment
+      - name: Terraform Plan
+        run: terraform plan
+
+      # Step 6: Apply Terraform configuration (automatic approval for this example)
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+
+      # Optional: Step 7: Cleanup resources (Optional, if you want to destroy after testing)
+      # - name: Terraform Destroy
+      #   run: terraform destroy -auto-approve
